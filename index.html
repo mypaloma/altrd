@@ -585,6 +585,7 @@
       margin-bottom: 0.75rem;
     }
     .science-card p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 0.75rem; }
+    .science-card p.service-benefit { font-size: 0.75rem; color: var(--accent); font-style: italic; margin-bottom: 0.5rem; }
     .science-card .evidence-tag {
       display: inline-block;
       font-size: 0.68rem;
@@ -847,6 +848,14 @@
       font-size: 0.9rem;
       display: none;
     }
+
+    /* ── EVIDENCE STRIP ── */
+    .evidence-strip { display:grid; grid-template-columns:repeat(4,1fr); gap:1.5rem; margin:2.5rem 0 2rem; }
+    .evidence-stat { text-align:center; padding:1.5rem 1rem; background:rgba(192,57,43,0.08); border-radius:8px; border-top:3px solid var(--accent); }
+    .evidence-number { display:block; font-family:var(--font-serif); font-size:2.2rem; color:var(--accent); font-weight:500; line-height:1; margin-bottom:0.5rem; }
+    .evidence-label { display:block; font-size:0.78rem; color:#555; line-height:1.5; }
+    @media(max-width:800px){ .evidence-strip { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:480px){ .evidence-strip { grid-template-columns:1fr; } }
 
     /* ── FOOTER ── */
     footer {
@@ -1342,6 +1351,12 @@
           <p>AltrD was founded by Dr Jacqui Lavis, a strategist and storyteller with deep roots in Far North Queensland and a lifelong commitment to the wellbeing of Indigenous communities. The program is built on a simple but radical premise: that healing does not begin with a diagnosis. It begins with belonging.</p>
           <p>The program combines three clinically validated mechanisms: VR-based cue exposure therapy, which helps participants regulate cravings in a safe and controlled environment; cultural reconnection, which systematic reviews show is a primary protective factor for Indigenous recovery; and motivational interviewing-aligned conversational guidance through an AI-assisted cultural companion. Together, these are delivered through an immersive 360° filmed experience on Country — not a computer-generated simulation, but real places, real voices, real country.</p>
           <p>AltrD is currently in Stage 1 development, supported by seed funding and a growing network of research, clinical, and community partners. It is designed to be evaluated rigorously, published in peer-reviewed journals, and scaled nationally and internationally to every community facing similar challenges.</p>
+          <div class="evidence-strip">
+            <div class="evidence-stat"><span class="evidence-number">60,000</span><span class="evidence-label">years of continuous culture — the foundation AltrD builds on</span></div>
+            <div class="evidence-stat"><span class="evidence-number">30.4%</span><span class="evidence-label">average dropout rate from mainstream addiction treatment — the gap AltrD addresses</span></div>
+            <div class="evidence-stat"><span class="evidence-number">17/20</span><span class="evidence-label">VR addiction RCTs show positive craving outcomes — the clinical mechanism AltrD uses</span></div>
+            <div class="evidence-stat"><span class="evidence-number">0</span><span class="evidence-label">existing peer-reviewed VR studies for Indigenous Australian addiction — the contribution AltrD makes</span></div>
+          </div>
           <div class="about-altrd-credentials">
             <span>✦ Dr Jacqui Lavis — Strategist and Storyteller</span>
             <span>✦ Andrew Lizzio — Enterprise Architect</span>
@@ -1406,17 +1421,17 @@
         <div class="problem-card">
           <div class="problem-card-num">01</div>
           <h3>Highest Risk, Least Served</h3>
-          <p>Indigenous Australians who drink at risky levels experience substantially worse outcomes. Existing services are not designed for cultural context, leading to disengagement and relapse. The system was not built with community — and community knows it.</p>
+          <p>A widely misunderstood fact: Aboriginal and Torres Strait Islander peoples are more likely to abstain from alcohol than non-Indigenous Australians. The burden of harm falls disproportionately on the 18% who do drink at risky levels — people navigating the intersection of intergenerational trauma, cultural disconnection, and structural disadvantage that mainstream services were never designed to address. The average dropout rate from in-person psychosocial addiction treatment is 30.4%. For Indigenous Australians, the barriers go deeper: cultural unsafety, geographic isolation, linguistic barriers, a workforce that does not reflect their communities, and services that treat individuals when the problem is systemic.</p>
         </div>
         <div class="problem-card">
           <div class="problem-card-num">02</div>
           <h3>Culture as Medicine</h3>
-          <p>Systematic review evidence shows cultural self-determination and community governance are the critical success factors that mainstream clinical programmes consistently lack. Culture is not a supplement to treatment — it is the treatment.</p>
+          <p>The systematic review evidence is unequivocal. Community-based alcohol and other drug programs that embed cultural self-determination, First Nations leadership, and family inclusion consistently outperform mainstream clinical models. Participation in caring-for-country activities is associated with lower psychological distress and strengthened connection to Country. Cultural identity is a documented protective factor against alcohol misuse. The evidence is not that culture is a nice addition to treatment — it is that without culture, treatment does not work. AltrD is built on this evidence. The clinical design follows from it, not the other way around.</p>
         </div>
         <div class="problem-card">
           <div class="problem-card-num">03</div>
           <h3>A Global First</h3>
-          <p>No peer-reviewed published study has evaluated VR-based therapeutic intervention for alcohol use disorder in Aboriginal or Torres Strait Islander populations. AltrD will change that — with community, not for community.</p>
+          <p>In the entire published peer-reviewed literature, there is not a single controlled study evaluating a VR-based therapeutic intervention designed for Aboriginal and Torres Strait Islander populations for any health condition. The closest precedent is an Inuit VR study in Canada — different country, different culture, different colonial history, results still pending. The UNSW Transforming Trauma project, funded by a $2.8 million Medical Research Future Fund grant in 2024, works with Aboriginal communities on VR for intergenerational trauma — not addiction. The gap AltrD fills has been documented, confirmed, and remains completely unaddressed. That is not a weakness of this project. It is its scientific contribution.</p>
         </div>
       </div>
     </div>
@@ -1433,21 +1448,24 @@
         <div class="science-card fade-in">
           <div class="science-card-icon">◈</div>
           <h3>VR Cue Exposure Therapy</h3>
-          <p>Systematic review of randomised controlled trial evidence demonstrates strong positive effects for virtual reality intervention in alcohol use disorder. When people are safely exposed to cues in a controlled immersive environment, craving responses are reduced and extinction learning is accelerated.</p>
+          <p>Systematic reviews of 20 randomised controlled trials find that 17 report positive effects on at least one outcome. VR-based cue exposure therapy works through Pavlovian extinction learning: repeated, safe exposure to the cues associated with drinking — without alcohol — progressively reduces the conditioned craving response. VR achieves this at higher ecological validity than traditional methods (photographs, guided imagery) because it can simulate the full sensory context: the environment, the social setting, the sounds. The evidence is strongest for alcohol use disorder. The critical finding across all trials: VR combined with active therapy components (CBT, motivational interviewing) consistently outperforms VR alone. AltrD is designed accordingly — the immersive experience is the vehicle, not the sole mechanism.</p>
+          <p class="service-benefit">Source: Glavak-Tkalić et al., 2025; Segawa et al., 2020; Kiyak et al., 2023 — Level I systematic reviews</p>
           <span class="evidence-tag">Glavak-Tkalić et al., 2025 · Level I Evidence · 17/20 RCTs positive</span>
         </div>
 
         <div class="science-card fade-in">
           <div class="science-card-icon">◉</div>
           <h3>Cultural Reconnection as Therapeutic Mechanism</h3>
-          <p>Systematic reviews of Indigenous-specific substance use interventions consistently identify cultural self-determination and healing on country as the primary protective and therapeutic factors. Identity, belonging, and connection to country are not secondary outcomes — they are the mechanism of recovery.</p>
+          <p>Cultural reconnection is not a supplement to clinical care for Indigenous Australians. It is the clinical care. The evidence, from multiple Level I systematic reviews, consistently identifies cultural self-determination, community governance, and holistic strength-based approaches as the factors that distinguish effective from ineffective programs. Connection to Country specifically — participation in caring-for-country activities, time on ancestral lands — is associated with measurably lower psychological distress and improved social and emotional wellbeing. AltrD uses VR to bring that connection into the clinical space when the clinical space is the only place someone can be reached. The 360° filmed environments are not decoration. They are an active ingredient.</p>
+          <p class="service-benefit">Source: Krakouer et al., 2022; Heath et al., 2022; Fatima et al., 2022 — Level I systematic reviews</p>
           <span class="evidence-tag">Krakouer et al., 2022 · Level I Evidence</span>
         </div>
 
         <div class="science-card fade-in">
           <div class="science-card-icon">◎</div>
           <h3>Motivational Interviewing in VR</h3>
-          <p>AI-guided conversational pathways aligned with motivational interviewing frameworks support agency, self-efficacy, and self-determination in the recovery process. The AltrD environment responds to the individual — meeting them in their readiness, not prescribing a stage they have not yet reached.</p>
+          <p>The third clinical mechanism is a culturally aware AI conversational companion, built on motivational interviewing principles. MI is one of the most evidence-supported brief interventions for alcohol use disorder: it is collaborative, person-centred, and focused on evoking the person's own reasons for change rather than prescribing behaviour. AltrD's AI guide is not a chatbot delivering scripted messages. It is a responsive conversational pathway that reads where the person is, meets them there, and supports the work of cultural reconnection with guided reflection. In the VR context, it functions as the voice of accompaniment — present but not intrusive, guiding without directing. The ethical boundary is clear: this is a support tool, not a replacement for a clinician or an elder.</p>
+          <p class="service-benefit">Source: Segawa et al., 2020; Bell et al., 2024 — Level I review; Seon et al., 2023 — RCT protocol</p>
           <span class="evidence-tag">Evidence-Based Framework · Miller &amp; Rollnick, 2013</span>
         </div>
 
@@ -1462,10 +1480,9 @@
         <div class="experience-narrative fade-in">
           <span class="section-label light">The Proof of Concept</span>
           <h2>What You Will Experience</h2>
-          <p>Put on the headset. You are standing on country — red earth, ancient rock shelters, the sound of wind moving through spinifex. A wedge-tailed eagle crosses the sky overhead.</p>
-          <p>An elder's voice speaks to you — in language, in story, in the cadence that has carried this country for sixty thousand years. The clinical room disappears. The craving that brought you here begins to soften — not through willpower, but through something older and more durable: a sense of belonging, of place, of self.</p>
-          <p>This is not escapism. This is return. The VR environment is not designed to take you away from yourself — it is designed to bring you back.</p>
-          <p>The AltrD proof of concept is a two-minute immersive experience demonstrating what becomes possible when technology steps back and culture steps forward. The headset is a doorway. What lies on the other side is home.</p>
+          <p>Put on the headset. You are standing in Far North Queensland country — the Wet Tropics, the Cape, the place your family comes from. The sound of water moving over rocks. The smell of eucalyptus after rain. A paperbark forest at dawn. An elder's voice, speaking in language, welcoming you home.</p>
+          <p>You walk through country that has held your people for sixty thousand years. You sit with an elder at a campfire. You hear stories — stories about who you are, where you come from, why you are still here. For fifteen minutes, in whatever clinical or community setting you are sitting in, the disconnection lifts. You remember. That remembering is the beginning of healing.</p>
+          <p>The AltrD PoC experience is filmed on real country, with real community consent and cultural governance. It uses Meta Quest VR headsets and the Wonda VR platform — accessible, portable, no custom software required. It is not a game or a simulation. It is a cultural encounter, delivered at the moment it is most needed.</p>
           <div class="cta-wrap">
             <a href="#contact" class="btn-primary">Request a Demo</a>
           </div>
@@ -1585,6 +1602,24 @@
         </div>
 
         <div class="fade-in">
+          <div class="research-stats-strip" style="display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-bottom:2rem;">
+            <div style="padding:1.25rem;background:rgba(192,57,43,0.12);border-radius:8px;border-top:3px solid var(--accent);text-align:center;">
+              <span style="display:block;font-family:var(--font-serif);font-size:2rem;color:var(--accent);font-weight:500;line-height:1;margin-bottom:0.4rem;">17 of 20 RCTs</span>
+              <span style="display:block;font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;">randomised controlled trials show positive effects on craving outcomes in alcohol use disorder</span>
+            </div>
+            <div style="padding:1.25rem;background:rgba(192,57,43,0.12);border-radius:8px;border-top:3px solid var(--accent);text-align:center;">
+              <span style="display:block;font-family:var(--font-serif);font-size:2rem;color:var(--accent);font-weight:500;line-height:1;margin-bottom:0.4rem;">Zero</span>
+              <span style="display:block;font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;">peer-reviewed VR studies designed for Aboriginal and Torres Strait Islander populations. Anywhere. This is the gap AltrD fills.</span>
+            </div>
+            <div style="padding:1.25rem;background:rgba(192,57,43,0.12);border-radius:8px;border-top:3px solid var(--accent);text-align:center;">
+              <span style="display:block;font-family:var(--font-serif);font-size:2rem;color:var(--accent);font-weight:500;line-height:1;margin-bottom:0.4rem;">5 Level I</span>
+              <span style="display:block;font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;">systematic reviews form the clinical evidence foundation for AltrD's therapeutic design</span>
+            </div>
+            <div style="padding:1.25rem;background:rgba(192,57,43,0.12);border-radius:8px;border-top:3px solid var(--accent);text-align:center;">
+              <span style="display:block;font-family:var(--font-serif);font-size:2rem;color:var(--accent);font-weight:500;line-height:1;margin-bottom:0.4rem;">$34M+</span>
+              <span style="display:block;font-size:0.75rem;color:rgba(255,255,255,0.6);line-height:1.5;">in identified grant funding available across 10+ Australian and international funding bodies</span>
+            </div>
+          </div>
           <div class="research-evidence">
             <h3>The Evidence Foundation</h3>
             <ul class="evidence-list">
