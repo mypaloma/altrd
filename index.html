@@ -1249,6 +1249,33 @@
 
     .about-altrd-grid { display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: start; }
     @media(max-width:900px){ .about-altrd-grid { grid-template-columns: 1fr; } }
+
+    .vision-statement-block { border-left: 4px solid var(--accent); padding: 1.5rem 2rem; margin: 2rem 0; background: rgba(192,57,43,0.06); border-radius: 0 8px 8px 0; }
+    .vision-statement-text { font-family: var(--font-serif); font-size: 1.2rem; font-style: italic; color: var(--teal-deep); line-height: 1.7; margin-bottom: 0.75rem; }
+    .vision-statement-attr { font-size: 0.85rem; color: var(--accent); font-weight: 500; }
+
+    .objectives-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; margin: 2rem 0; }
+    .objective-card { padding: 1.25rem; background: white; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); border-top: 3px solid var(--accent); }
+    .obj-icon { font-size: 1.5rem; display: block; margin-bottom: 0.5rem; }
+    .objective-card h4 { font-family: var(--font-serif); font-size: 1rem; color: var(--teal-deep); margin-bottom: 0.4rem; }
+    .objective-card p { font-size: 0.85rem; color: #555; line-height: 1.6; }
+    @media(max-width:700px){ .objectives-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px){ .objectives-grid { grid-template-columns: 1fr; } }
+
+    .modalities-block { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.15); }
+    .modalities-block h3 { font-size: 1.4rem; margin-bottom: 0.5rem; }
+    .modalities-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+    .modality-item { padding: 1rem; background: rgba(255,255,255,0.06); border-radius: 6px; border-left: 3px solid var(--accent); }
+    .modality-item strong { display: block; color: var(--accent-light); font-size: 0.88rem; margin-bottom: 0.4rem; }
+    .modality-item span { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.6; }
+    @media(max-width:700px){ .modalities-grid { grid-template-columns: repeat(2,1fr); } }
+    @media(max-width:480px){ .modalities-grid { grid-template-columns: 1fr; } }
+
+    .mvp-callout { background: rgba(44,95,95,0.15); border: 1px solid rgba(44,95,95,0.4); border-radius: 10px; padding: 1.5rem 2rem; margin: 1.5rem 0; }
+    .mvp-callout h4 { color: var(--accent); font-family: var(--font-serif); font-size: 1.05rem; margin-bottom: 1rem; }
+    .mvp-items { display: flex; flex-direction: column; gap: 0.6rem; }
+    .mvp-item { font-size: 0.9rem; color: rgba(255,255,255,0.85); }
+    .mvp-item strong { color: white; }
   </style>
 </head>
 
@@ -1344,6 +1371,10 @@
     <div class="container">
       <span class="section-label">About the Program</span>
       <h2>What Is AltrD?</h2>
+      <div class="vision-statement-block">
+        <p class="vision-statement-text">"To create an accessible, culturally safe, immersive therapeutic ecosystem where individuals, families, and communities can access evidence-based support, emotional regulation tools, and guided simulations that promote healing, recovery, and wellbeing."</p>
+        <p class="vision-statement-attr">— Dr Jacqui Lavis, AltrD Vision Statement, March 2026</p>
+      </div>
       <div class="about-altrd-grid">
         <div class="about-altrd-text about-altrd-prose fade-in">
           <p>AltrD — pronounced <em>Altered</em> — is a therapeutic metaverse designed with and for Aboriginal and Torres Strait Islander peoples. It is the first program of its kind in the world: a culturally governed, immersive virtual reality experience that uses connection to Country, culture, and community as the primary mechanism for supporting recovery from alcohol and substance addiction.</p>
@@ -1351,6 +1382,14 @@
           <p>AltrD was founded by Dr Jacqui Lavis, a strategist and storyteller with deep roots in Far North Queensland and a lifelong commitment to the wellbeing of Indigenous communities. The program is built on a simple but radical premise: that healing does not begin with a diagnosis. It begins with belonging.</p>
           <p>The program combines three clinically validated mechanisms: VR-based cue exposure therapy, which helps participants regulate cravings in a safe and controlled environment; cultural reconnection, which systematic reviews show is a primary protective factor for Indigenous recovery; and motivational interviewing-aligned conversational guidance through an AI-assisted cultural companion. Together, these are delivered through an immersive 360° filmed experience on Country — not a computer-generated simulation, but real places, real voices, real country.</p>
           <p>AltrD is currently in Stage 1 development, supported by seed funding and a growing network of research, clinical, and community partners. It is designed to be evaluated rigorously, published in peer-reviewed journals, and scaled nationally and internationally to every community facing similar challenges.</p>
+          <div class="objectives-grid">
+            <div class="objective-card"><span class="obj-icon">🔓</span><h4>Low-Barrier Access</h4><p>Immersive, accessible therapeutic experiences that reach people where mainstream services cannot.</p></div>
+            <div class="objective-card"><span class="obj-icon">🎯</span><h4>Deep Engagement</h4><p>Interactive environments, embodied experiences, and real-time feedback that hold attention and drive participation.</p></div>
+            <div class="objective-card"><span class="obj-icon">📊</span><h4>Clinical Outcomes</h4><p>Validated therapeutic mechanisms embedded within every virtual experience — not just immersion, but measurable clinical benefit.</p></div>
+            <div class="objective-card"><span class="obj-icon">🏛</span><h4>Cultural Governance</h4><p>Community authority over every aspect of design, content, and delivery — ensuring safety, relevance, and trust.</p></div>
+            <div class="objective-card"><span class="obj-icon">🤖</span><h4>Adaptive AI</h4><p>Real-time personalisation responding to behaviour, emotional cues, and user goals — culturally aware and clinically supervised.</p></div>
+            <div class="objective-card"><span class="obj-icon">🔬</span><h4>Research-Ready</h4><p>A platform built from the ground up for evaluation, iteration, and continuous improvement — publishable evidence from day one.</p></div>
+          </div>
           <div class="evidence-strip">
             <div class="evidence-stat"><span class="evidence-number">60,000</span><span class="evidence-label">years of continuous culture — the foundation AltrD builds on</span></div>
             <div class="evidence-stat"><span class="evidence-number">30.4%</span><span class="evidence-label">average dropout rate from mainstream addiction treatment — the gap AltrD addresses</span></div>
@@ -1504,6 +1543,18 @@
             <h4>Clinical Integration</h4>
             <p>Designed for deployment within existing health services — hospital wards, community health centres, residential treatment facilities. Requires only a standalone VR headset and fifteen minutes of clinical time.</p>
           </div>
+        </div>
+      </div>
+      <div class="modalities-block">
+        <h3 class="light">Therapeutic Modalities</h3>
+        <p class="light" style="margin-bottom:1.5rem;">AltrD integrates a full spectrum of evidence-based therapeutic approaches within the immersive environment — not as separate programs but as woven elements of a single cultural healing experience.</p>
+        <div class="modalities-grid">
+          <div class="modality-item"><strong>Cognitive-Behavioural &amp; Exposure-Based</strong><span>Cue exposure therapy, approach-bias modification, and graded re-engagement with high-risk scenarios in a controlled, safe environment.</span></div>
+          <div class="modality-item"><strong>Mindfulness &amp; Sensory Regulation</strong><span>Grounding techniques and sensory regulation tools embedded within on-Country environments — breathwork, presence practice, body awareness.</span></div>
+          <div class="modality-item"><strong>Motivational Interviewing</strong><span>AI-guided conversational pathways aligned with MI principles — evoking the person's own reasons for change, not prescribing behaviour.</span></div>
+          <div class="modality-item"><strong>Culturally Informed Healing</strong><span>Elder-guided cultural content, language, and ceremony — co-designed with community and governed by Traditional Owners.</span></div>
+          <div class="modality-item"><strong>Peer-Supported Experience</strong><span>Group virtual environments where shared experience amplifies individual healing — facilitated safely with community moderation.</span></div>
+          <div class="modality-item"><strong>Crisis-Safe Simulation</strong><span>Controlled replication of high-risk scenarios — cravings, conflict, distress — with immediate clinical support pathways and safety protocols.</span></div>
         </div>
       </div>
     </div>
@@ -1674,6 +1725,15 @@
           <div class="milestone-step">
             <div class="milestone-step-month">Month 4 — July 2026</div>
             <p>PoC demonstrated to Orygen XR Lab. Scoping review submitted to Drug and Alcohol Review. QMHC grant result expected.</p>
+          </div>
+        </div>
+        <div class="mvp-callout fade-in">
+          <h4>MVP Definition (Jacqui Lavis, March 2026)</h4>
+          <div class="mvp-items">
+            <div class="mvp-item">🌐 <strong>One immersive therapeutic world</strong> — grounding or emotional regulation — using established VR technology</div>
+            <div class="mvp-item">🤖 <strong>One interactive guided therapeutic agent</strong> — culturally aware, motivationally aligned AI companion</div>
+            <div class="mvp-item">📋 <strong>Basic clinician dashboard</strong> — session monitoring, care pathway integration, moderator tools</div>
+            <div class="mvp-item">🛡 <strong>Safety workflows</strong> — crisis protocol triggers, real-time monitoring, human override</div>
           </div>
         </div>
       </div>
