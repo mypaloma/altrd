@@ -1230,11 +1230,15 @@
       .vision-card-grid { grid-template-columns: 1fr; }
     }
 
-    .how-steps { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 3rem; max-width: 860px; margin-left: auto; margin-right: auto; }
-    .how-step { display: grid; grid-template-columns: 56px 1fr; gap: 1.5rem; align-items: start; }
-    .how-step-icon { font-size: 2rem; line-height: 1; padding-top: 0.2rem; text-align: center; }
-    .how-step h3 { color: var(--accent); font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.75rem; }
-    .how-step p { color: rgba(255,255,255,0.82); line-height: 1.8; font-size: 0.96rem; }
+    .how-steps { display:flex; flex-direction:column; gap:2.5rem; margin-top:3rem; max-width:860px; margin-left:auto; margin-right:auto; }
+    .how-step { display:grid; grid-template-columns:56px 1fr; gap:1.5rem; align-items:start; }
+    .how-step-icon { font-size:2rem; line-height:1; padding-top:0.2rem; text-align:center; }
+    .how-step h3 { color:var(--accent); font-family:var(--font-serif); font-size:1.25rem; margin-bottom:0.75rem; }
+    .how-step p { color:rgba(255,255,255,0.82); line-height:1.8; font-size:0.96rem; }
+    @media(max-width:600px){ .how-step { grid-template-columns:40px 1fr; gap:1rem; } .how-step-icon { font-size:1.5rem; } }
+
+    .about-altrd-grid { display: grid; grid-template-columns: 1fr 420px; gap: 4rem; align-items: start; }
+    @media(max-width:900px){ .about-altrd-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 
@@ -1254,7 +1258,7 @@
       </button>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#about-altrd">About the Program</a></li>
+        <li><a href="#about-altrd">The Program</a></li>
         <li><a href="#vision">The Vision</a></li>
         <li><a href="#problem">The Gap</a></li>
         <li><a href="#how">Strategy</a></li>
@@ -1330,18 +1334,21 @@
     <div class="container">
       <span class="section-label">About the Program</span>
       <h2>What Is AltrD?</h2>
-      <div class="about-altrd-prose fade-in">
-        <p>AltrD — pronounced <em>Altered</em> — is a therapeutic metaverse designed with and for Aboriginal and Torres Strait Islander peoples. It is the first program of its kind in the world: a culturally governed, immersive virtual reality experience that uses connection to Country, culture, and community as the primary mechanism for supporting recovery from alcohol and substance addiction.</p>
-        <p>The name is deliberate. AltrD is about altered states — but not the kind that come from substances. The kind that come from standing on your own country, hearing an elder speak in language, sitting by a campfire under a sky that has watched over your ancestors for sixty thousand years. That kind of altered state is not a side effect. It is the medicine.</p>
-        <p>AltrD was founded by Dr Jacqui Lavis, a strategist and storyteller with deep roots in Far North Queensland and a lifelong commitment to the wellbeing of Indigenous communities. The program is built on a simple but radical premise: that healing does not begin with a diagnosis. It begins with belonging.</p>
-        <p>The program combines three clinically validated mechanisms: VR-based cue exposure therapy, which helps participants regulate cravings in a safe and controlled environment; cultural reconnection, which systematic reviews show is a primary protective factor for Indigenous recovery; and motivational interviewing-aligned conversational guidance through an AI-assisted cultural companion. Together, these are delivered through an immersive 360° filmed experience on Country — not a computer-generated simulation, but real places, real voices, real country.</p>
-        <p>AltrD is currently in Stage 1 development, supported by seed funding and a growing network of research, clinical, and community partners. It is designed to be evaluated rigorously, published in peer-reviewed journals, and scaled nationally and internationally to every community facing similar challenges.</p>
-        <div class="about-altrd-credentials">
-          <span>✦ Dr Jacqui Lavis — Founder &amp; Cultural Strategist</span>
-          <span>✦ Andrew Lizzio — Enterprise Architect</span>
-          <span>✦ James Cook University — Research Affiliation</span>
-          <span>✦ Far North Queensland</span>
+      <div class="about-altrd-grid">
+        <div class="about-altrd-text about-altrd-prose fade-in">
+          <p>AltrD — pronounced <em>Altered</em> — is a therapeutic metaverse designed with and for Aboriginal and Torres Strait Islander peoples. It is the first program of its kind in the world: a culturally governed, immersive virtual reality experience that uses connection to Country, culture, and community as the primary mechanism for supporting recovery from alcohol and substance addiction.</p>
+          <p>The name is deliberate. AltrD is about altered states — but not the kind that come from substances. The kind that come from standing on your own country, hearing an elder speak in language, sitting by a campfire under a sky that has watched over your ancestors for sixty thousand years. That kind of altered state is not a side effect. It is the medicine.</p>
+          <p>AltrD was founded by Dr Jacqui Lavis, a strategist and storyteller with deep roots in Far North Queensland and a lifelong commitment to the wellbeing of Indigenous communities. The program is built on a simple but radical premise: that healing does not begin with a diagnosis. It begins with belonging.</p>
+          <p>The program combines three clinically validated mechanisms: VR-based cue exposure therapy, which helps participants regulate cravings in a safe and controlled environment; cultural reconnection, which systematic reviews show is a primary protective factor for Indigenous recovery; and motivational interviewing-aligned conversational guidance through an AI-assisted cultural companion. Together, these are delivered through an immersive 360° filmed experience on Country — not a computer-generated simulation, but real places, real voices, real country.</p>
+          <p>AltrD is currently in Stage 1 development, supported by seed funding and a growing network of research, clinical, and community partners. It is designed to be evaluated rigorously, published in peer-reviewed journals, and scaled nationally and internationally to every community facing similar challenges.</p>
+          <div class="about-altrd-credentials">
+            <span>✦ Dr Jacqui Lavis — Founder &amp; Cultural Strategist</span>
+            <span>✦ Andrew Lizzio — Enterprise Architect</span>
+            <span>✦ James Cook University — Research Affiliation</span>
+            <span>✦ Far North Queensland</span>
+          </div>
         </div>
+        <div class="about-altrd-img fade-in"><img src="assets/images/jacqui-lavis.jpg" alt="Dr Jacqui Lavis, Founder of AltrD, in conversation — Far North Queensland" style="width:100%;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,0.18);"></div>
       </div>
     </div>
   </section>
@@ -1368,6 +1375,22 @@
           <p>The problem AltrD addresses is not uniquely Australian. Indigenous peoples in Canada, New Zealand, the United States, and across the Pacific face the same intersection of dispossession, intergenerational trauma, and inadequate mainstream treatment services. A culturally governed VR platform that proves its value in Far North Queensland becomes a template for adaptation globally.</p>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE GET THERE ── -->
+  <section id="how" class="section-dark">
+    <div class="container">
+      <span class="section-label light">The Strategy</span>
+      <h2 class="light">Big Impact. Short Timeline. Here Is How.</h2>
+      <p class="section-intro light">What AltrD is attempting in 12 months would normally take 5 years. This is how we compress that timeline without compromising scientific rigour or cultural integrity.</p>
+      <div class="how-steps">
+        <div class="how-step fade-in"><div class="how-step-icon">🔬</div><div><h3>1. Research First, Build Second</h3><p>Before a single frame was filmed or a line of code written, AltrD commissioned a comprehensive, publication-grade research foundation — a full evidence synthesis, a scoping review manuscript ready for peer-reviewed journal submission, and a PRISMA-ScR flow diagram. This work, which would typically take 3–6 months, was completed in days using advanced AI research architecture. Every design decision is already scientifically defensible. No rework. No retrofitting evidence to decisions already made.</p></div></div>
+        <div class="how-step fade-in"><div class="how-step-icon">🤝</div><div><h3>2. Strategic Partnerships Over Solo Builds</h3><p>AltrD is not trying to build clinical trial infrastructure from scratch. Professor Lucia Valmaggia of Orygen Digital XR Innovation Lab at the University of Melbourne — ranked among the top three VR mental health researchers in the world — has been identified as the ideal research partner. Orygen already has the ethics frameworks, clinical trial methodology, and publication pipeline. AltrD brings the cultural governance and community authority Orygen cannot build internally. Together, the first peer-reviewed evidence for culturally governed VR therapy with Indigenous Australians becomes achievable within Stage 1.</p></div></div>
+        <div class="how-step fade-in"><div class="how-step-icon">🎥</div><div><h3>3. A Proof of Concept That Speaks for Itself</h3><p>The AltrD PoC will be a 360° filmed experience on Country — real country, real elders, real cultural content filmed with full community consent and governance. Delivered via Meta Quest headsets using the Wonda VR platform, it requires no custom software development and no budget beyond what is already committed. The PoC is not a product. It is a demonstration that changes minds in the room — the kind of experience that makes a funder reach for their pen.</p></div></div>
+        <div class="how-step fade-in"><div class="how-step-icon">💰</div><div><h3>4. A Stacked Funding Strategy</h3><p>AltrD has identified over $34 million in applicable grant funding across 10+ funding bodies — QMHC, Ian Potter Foundation, NHMRC, MRFF, PHN, and others — with specific eligibility analysis, submission timelines, and probability assessments for each. The strategy sequences applications to build momentum: small wins first, major grants when partnership credentials and PoC evidence are in place. No single grant is a dependency. Diversified, staged, evidence-backed.</p></div></div>
+        <div class="how-step fade-in"><div class="how-step-icon">👥</div><div><h3>5. Community Owns It</h3><p>Nothing in AltrD moves without community governance. An Aboriginal Community Controlled Organisation is required as the lead applicant for the largest available grant — and that is not a compliance requirement, it is the design. AltrD is not a product delivered to communities. It is a platform built by communities. Community ownership is what makes it last beyond any single program cycle, any single grant period, any single government priority.</p></div></div>
       </div>
     </div>
   </section>
@@ -1577,52 +1600,6 @@
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ── HOW WE GET THERE ── -->
-  <section id="how" class="section-dark">
-    <div class="container">
-      <span class="section-label light">The Strategy</span>
-      <h2 class="light">Big Impact. Short Timeline. Here Is How.</h2>
-      <p class="section-intro light">What AltrD is attempting in 12 months would normally take 5 years. This is how we are compressing that timeline without compromising scientific rigour or cultural integrity.</p>
-      <div class="how-steps">
-        <div class="how-step fade-in">
-          <div class="how-step-icon">🔬</div>
-          <div>
-            <h3>1. Research First, Build Second</h3>
-            <p>Before a single frame was filmed or a line of code written, AltrD commissioned a comprehensive, publication-grade research foundation — a full evidence synthesis, a scoping review manuscript ready for peer-reviewed journal submission, and a PRISMA-ScR flow diagram. This work, which would typically take 3–6 months, was completed in days using advanced AI research architecture. Every design decision is already scientifically defensible. No rework. No retrofitting evidence to decisions already made.</p>
-          </div>
-        </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">🤝</div>
-          <div>
-            <h3>2. Strategic Partnerships Over Solo Builds</h3>
-            <p>AltrD is not trying to build clinical trial infrastructure from scratch. Professor Lucia Valmaggia of Orygen's XR Innovation Lab at the University of Melbourne — ranked among the top three VR mental health researchers in the world — has been identified as the ideal research partner. Orygen already has the ethics frameworks, clinical trial methodology, and publication pipeline. AltrD brings the cultural governance and community authority Orygen cannot build internally. Together, the first peer-reviewed evidence for culturally governed VR therapy with Indigenous Australians becomes achievable within Stage 1.</p>
-          </div>
-        </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">🎥</div>
-          <div>
-            <h3>3. A Proof of Concept That Speaks for Itself</h3>
-            <p>The AltrD PoC will be a 360° filmed experience on Country — real country, real elders, real cultural content filmed with full community consent and governance. Delivered via Meta Quest headsets using the Wonda VR platform, it requires no custom software development and no budget beyond what is already committed. The PoC is not a product. It is a demonstration that changes minds in the room — the kind of experience that makes a funder reach for their pen.</p>
-          </div>
-        </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">💰</div>
-          <div>
-            <h3>4. A Stacked Funding Strategy</h3>
-            <p>AltrD has identified over $34 million in applicable grant funding across 10+ funding bodies — QMHC, Ian Potter Foundation, NHMRC, MRFF, PHN, and others — with specific eligibility analysis, submission timelines, and probability assessments for each. The strategy sequences applications to build momentum: small wins first, major grants when partnership credentials and PoC evidence are in place. No single grant is a dependency. The funding strategy is diversified, staged, and evidence-backed.</p>
-          </div>
-        </div>
-        <div class="how-step fade-in">
-          <div class="how-step-icon">👥</div>
-          <div>
-            <h3>5. Community Owns It</h3>
-            <p>Nothing in AltrD moves without community governance. An Aboriginal Community Controlled Organisation is required as the lead applicant for the largest available grant — and that is not a compliance requirement, it is the design. AltrD is not a product delivered to communities. It is a platform built by communities. Community ownership is what makes it last beyond any single program cycle, any single grant period, any single government priority.</p>
-          </div>
-        </div>
       </div>
     </div>
   </section>
