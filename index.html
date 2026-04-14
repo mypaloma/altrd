@@ -1160,6 +1160,81 @@
       transition: border-color 0.25s, background 0.25s, color 0.25s;
     }
     .btn-outline:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+
+    /* ── ABOUT ALTRD SECTION ── */
+    .about-altrd-prose {
+      max-width: 820px;
+    }
+    .about-altrd-prose > p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      line-height: 1.9;
+      margin-bottom: 1.25rem;
+    }
+    .about-altrd-credentials {
+      margin-top: 2.5rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--warm-mid);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2.5rem;
+      font-size: 0.82rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    /* ── VISION SECTION ── */
+    #vision {
+      position: relative;
+      background: url('assets/images/altrd-elder-ceremonial.jpg') center/cover no-repeat var(--teal-dark);
+      padding: 7rem 0;
+    }
+    #vision::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.76);
+      pointer-events: none;
+    }
+    #vision .container {
+      position: relative;
+      z-index: 2;
+    }
+    .vision-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .vision-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-top: 3px solid var(--accent);
+      padding: 2.5rem 2rem;
+      transition: background 0.3s;
+    }
+    .vision-card:hover { background: rgba(255,255,255,0.1); }
+    .vision-card h3 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 1rem;
+    }
+    .vision-card p {
+      color: rgba(255,255,255,0.72);
+      font-size: 0.93rem;
+      line-height: 1.85;
+      margin-bottom: 0;
+    }
+
+    @media (max-width: 1024px) {
+      .vision-card-grid { grid-template-columns: 1fr; }
+    }
+
+    .how-steps { display: flex; flex-direction: column; gap: 2.5rem; margin-top: 3rem; max-width: 860px; margin-left: auto; margin-right: auto; }
+    .how-step { display: grid; grid-template-columns: 56px 1fr; gap: 1.5rem; align-items: start; }
+    .how-step-icon { font-size: 2rem; line-height: 1; padding-top: 0.2rem; text-align: center; }
+    .how-step h3 { color: var(--accent); font-family: var(--font-serif); font-size: 1.25rem; margin-bottom: 0.75rem; }
+    .how-step p { color: rgba(255,255,255,0.82); line-height: 1.8; font-size: 0.96rem; }
   </style>
 </head>
 
@@ -1179,7 +1254,10 @@
       </button>
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#problem">Vision</a></li>
+        <li><a href="#about-altrd">About the Program</a></li>
+        <li><a href="#vision">The Vision</a></li>
+        <li><a href="#problem">The Gap</a></li>
+        <li><a href="#how">Strategy</a></li>
         <li><a href="#science">The Science</a></li>
         <li><a href="#experience">The Experience</a></li>
         <li><a href="#partnership">Partnership</a></li>
@@ -1243,6 +1321,53 @@
             <p class="about-panel-detail">AltrD · Therapeutic VR Metaverse · Est. 2024</p>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ABOUT ALTRD ── -->
+  <section id="about-altrd" class="section-warm">
+    <div class="container">
+      <span class="section-label">About the Program</span>
+      <h2>What Is AltrD?</h2>
+      <div class="about-altrd-prose fade-in">
+        <p>AltrD — pronounced <em>Altered</em> — is a therapeutic metaverse designed with and for Aboriginal and Torres Strait Islander peoples. It is the first program of its kind in the world: a culturally governed, immersive virtual reality experience that uses connection to Country, culture, and community as the primary mechanism for supporting recovery from alcohol and substance addiction.</p>
+        <p>The name is deliberate. AltrD is about altered states — but not the kind that come from substances. The kind that come from standing on your own country, hearing an elder speak in language, sitting by a campfire under a sky that has watched over your ancestors for sixty thousand years. That kind of altered state is not a side effect. It is the medicine.</p>
+        <p>AltrD was founded by Dr Jacqui Lavis, a strategist and storyteller with deep roots in Far North Queensland and a lifelong commitment to the wellbeing of Indigenous communities. The program is built on a simple but radical premise: that healing does not begin with a diagnosis. It begins with belonging.</p>
+        <p>The program combines three clinically validated mechanisms: VR-based cue exposure therapy, which helps participants regulate cravings in a safe and controlled environment; cultural reconnection, which systematic reviews show is a primary protective factor for Indigenous recovery; and motivational interviewing-aligned conversational guidance through an AI-assisted cultural companion. Together, these are delivered through an immersive 360° filmed experience on Country — not a computer-generated simulation, but real places, real voices, real country.</p>
+        <p>AltrD is currently in Stage 1 development, supported by seed funding and a growing network of research, clinical, and community partners. It is designed to be evaluated rigorously, published in peer-reviewed journals, and scaled nationally and internationally to every community facing similar challenges.</p>
+        <div class="about-altrd-credentials">
+          <span>✦ Dr Jacqui Lavis — Founder &amp; Cultural Strategist</span>
+          <span>✦ Andrew Lizzio — Enterprise Architect</span>
+          <span>✦ James Cook University — Research Affiliation</span>
+          <span>✦ Far North Queensland</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE VISION ── -->
+  <section id="vision">
+    <div class="container">
+      <span class="section-label light">The Vision</span>
+      <h2 class="light">A Healing That Lasts a Lifetime</h2>
+      <div class="vision-card-grid stagger-children">
+
+        <div class="vision-card">
+          <h3>Culture at the Centre</h3>
+          <p>The evidence is clear: cultural self-determination is not a cultural add-on to clinical care. It is the clinical care. AltrD is built on the principle that healing for Aboriginal and Torres Strait Islander peoples begins with belonging — to country, to community, to the stories that have carried people through sixty thousand years of unbroken existence. Virtual reality gives us the ability to bring that belonging into the clinical room when the clinical room is the only place someone can be reached.</p>
+        </div>
+
+        <div class="vision-card">
+          <h3>Science That Serves Community</h3>
+          <p>Every design decision in AltrD is traced to peer-reviewed evidence. The clinical mechanisms — cue exposure therapy, trauma-informed graduated exposure, motivational interviewing pathways — are supported by Level I systematic reviews. The cultural mechanisms — connection to Country, elder guidance, community belonging — are supported by First Nations-led research. AltrD does not ask communities to trust promises. It asks them to participate in building the evidence that justifies that trust.</p>
+        </div>
+
+        <div class="vision-card">
+          <h3>Beyond Australia</h3>
+          <p>The problem AltrD addresses is not uniquely Australian. Indigenous peoples in Canada, New Zealand, the United States, and across the Pacific face the same intersection of dispossession, intergenerational trauma, and inadequate mainstream treatment services. A culturally governed VR platform that proves its value in Far North Queensland becomes a template for adaptation globally.</p>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1452,6 +1577,52 @@
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ── HOW WE GET THERE ── -->
+  <section id="how" class="section-dark">
+    <div class="container">
+      <span class="section-label light">The Strategy</span>
+      <h2 class="light">Big Impact. Short Timeline. Here Is How.</h2>
+      <p class="section-intro light">What AltrD is attempting in 12 months would normally take 5 years. This is how we are compressing that timeline without compromising scientific rigour or cultural integrity.</p>
+      <div class="how-steps">
+        <div class="how-step fade-in">
+          <div class="how-step-icon">🔬</div>
+          <div>
+            <h3>1. Research First, Build Second</h3>
+            <p>Before a single frame was filmed or a line of code written, AltrD commissioned a comprehensive, publication-grade research foundation — a full evidence synthesis, a scoping review manuscript ready for peer-reviewed journal submission, and a PRISMA-ScR flow diagram. This work, which would typically take 3–6 months, was completed in days using advanced AI research architecture. Every design decision is already scientifically defensible. No rework. No retrofitting evidence to decisions already made.</p>
+          </div>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">🤝</div>
+          <div>
+            <h3>2. Strategic Partnerships Over Solo Builds</h3>
+            <p>AltrD is not trying to build clinical trial infrastructure from scratch. Professor Lucia Valmaggia of Orygen's XR Innovation Lab at the University of Melbourne — ranked among the top three VR mental health researchers in the world — has been identified as the ideal research partner. Orygen already has the ethics frameworks, clinical trial methodology, and publication pipeline. AltrD brings the cultural governance and community authority Orygen cannot build internally. Together, the first peer-reviewed evidence for culturally governed VR therapy with Indigenous Australians becomes achievable within Stage 1.</p>
+          </div>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">🎥</div>
+          <div>
+            <h3>3. A Proof of Concept That Speaks for Itself</h3>
+            <p>The AltrD PoC will be a 360° filmed experience on Country — real country, real elders, real cultural content filmed with full community consent and governance. Delivered via Meta Quest headsets using the Wonda VR platform, it requires no custom software development and no budget beyond what is already committed. The PoC is not a product. It is a demonstration that changes minds in the room — the kind of experience that makes a funder reach for their pen.</p>
+          </div>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">💰</div>
+          <div>
+            <h3>4. A Stacked Funding Strategy</h3>
+            <p>AltrD has identified over $34 million in applicable grant funding across 10+ funding bodies — QMHC, Ian Potter Foundation, NHMRC, MRFF, PHN, and others — with specific eligibility analysis, submission timelines, and probability assessments for each. The strategy sequences applications to build momentum: small wins first, major grants when partnership credentials and PoC evidence are in place. No single grant is a dependency. The funding strategy is diversified, staged, and evidence-backed.</p>
+          </div>
+        </div>
+        <div class="how-step fade-in">
+          <div class="how-step-icon">👥</div>
+          <div>
+            <h3>5. Community Owns It</h3>
+            <p>Nothing in AltrD moves without community governance. An Aboriginal Community Controlled Organisation is required as the lead applicant for the largest available grant — and that is not a compliance requirement, it is the design. AltrD is not a product delivered to communities. It is a platform built by communities. Community ownership is what makes it last beyond any single program cycle, any single grant period, any single government priority.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -1698,7 +1869,10 @@
       <p class="footer-tagline">Healing through Culture, Connection, and Country · Co-designed with and for Aboriginal and Torres Strait Islander peoples · Built on the foundations of 60,000 years of knowledge</p>
       <nav class="footer-nav">
         <a href="#about">About</a>
-        <a href="#problem">Vision</a>
+        <a href="#about-altrd">About the Program</a>
+        <a href="#vision">The Vision</a>
+        <a href="#problem">The Gap</a>
+        <a href="#how">Strategy</a>
         <a href="#science">The Science</a>
         <a href="#experience">The Experience</a>
         <a href="#partnership">Partnership</a>
