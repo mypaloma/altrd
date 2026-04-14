@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AltrD — Healing Through Culture, Connection, Country</title>
+  <meta name="description" content="AltrD is a therapeutic virtual reality metaverse designed with and for Indigenous Australians — using immersive cultural experiences to support recovery from alcohol and substance addiction.">
+  <meta property="og:title" content="AltrD — Therapeutic VR Metaverse for Indigenous Healing">
+  <meta property="og:description" content="A therapeutic virtual reality metaverse grounded in Indigenous self-determination and clinical evidence for VR-based therapeutic intervention.">
+  <meta property="og:image" content="assets/images/altrd-logo.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --teal-deep:    #1A3A3A;
+      --teal-dark:    #0D1F1F;
+      --teal-mid:     #2C5F5F;
+      --cream:        #F9F5F0;
+      --cream-warm:   #F0EBE3;
+      --warm-mid:     #E0D4C4;
+      --text:         #2d2d2d;
+      --text-muted:   #6b6560;
+      --accent:       #C0392B;
+      --accent-h:     #A93226;
+      --accent-light: #E74C3C;
+      --earth:        #8B4513;
+      --white:        #ffffff;
+      --font-head:    'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Jost', system-ui, sans-serif;
+      --ease:         cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: var(--font-body);
+      font-weight: 300;
+      color: var(--text);
+      background: var(--cream);
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { text-decoration: none; color: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    /* ── TYPOGRAPHY ── */
+    h1, h2, h3, h4 {
+      font-family: var(--font-head);
+      font-weight: 300;
+      line-height: 1.2;
+    }
+    h1 { font-size: clamp(3rem, 7vw, 6rem); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 1.25rem; }
+    h3 { font-size: 1.5rem; margin-bottom: 0.75rem; }
+    h4 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+    p { margin-bottom: 1rem; }
+
+    .section-label {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transition: opacity 0.6s ease, letter-spacing 0.6s ease;
+    }
+    .section-label.revealed { opacity: 1; letter-spacing: 0.2em; }
+    .section-label.light { color: var(--accent-light); }
+
+    .section-intro {
+      font-size: 1.05rem;
+      max-width: 720px;
+      color: var(--text-muted);
+      margin-bottom: 3rem;
+    }
+    .section-intro.light { color: rgba(255,255,255,0.75); }
+
+    .text-centre { text-align: center; }
+    .text-centre .section-intro { margin-left: auto; margin-right: auto; }
+    .light { color: #fff; }
+
+    /* ── BUTTONS ── */
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s var(--ease), transform 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent-h); transform: translateY(-1px); }
+    .btn-primary.full-width { width: 100%; text-align: center; }
+
+    .btn-ghost {
+      display: inline-block;
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.9rem 2.2rem;
+      border: 1px solid rgba(255,255,255,0.5);
+      transition: border-color 0.25s, background 0.25s;
+    }
+    .btn-ghost:hover { border-color: #fff; background: rgba(255,255,255,0.1); }
+
+    .hero-btns {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hero-btns.revealed { opacity: 1; transform: none; }
+
+    /* ── RIPPLE ── */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transform: scale(0);
+      animation: ripple-anim 0.55s linear;
+      pointer-events: none;
+    }
+    @keyframes ripple-anim { to { transform: scale(4); opacity: 0; } }
+
+    /* ── NAV ── */
+    #nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--teal-deep);
+      transition: box-shadow 0.3s;
+    }
+    #nav.scrolled { box-shadow: 0 2px 20px rgba(0,0,0,0.4); }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 88px;
+      padding: 0 2rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .nav-logo img { height: 56px; display: block; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.75);
+      font-size: 0.78rem;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.5rem 0.75rem;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      bottom: 2px; left: 0.75rem; right: 0.75rem;
+      height: 1px;
+      background: var(--accent-light);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:not(.nav-cta):hover::after { transform: scaleX(1); }
+    .nav-links a:hover { color: #fff; }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: #fff !important;
+      padding: 0.5rem 1.25rem !important;
+      margin-left: 0.5rem;
+      transition: background 0.25s !important;
+    }
+    .nav-cta:hover { background: var(--accent-h) !important; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: #fff;
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    /* ── SCROLL PROGRESS ── */
+    #scroll-progress {
+      position: fixed;
+      top: 85px; left: 0;
+      height: 3px;
+      width: 0%;
+      background: var(--accent-light);
+      z-index: 9999;
+      transition: width 0.1s linear;
+      box-shadow: 0 0 6px rgba(231,76,60,0.6);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh;
+      min-height: 640px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--teal-dark);
+    }
+
+    .hero-gradient {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      animation: heroShift 20s ease-in-out infinite alternate;
+    }
+    @keyframes heroShift {
+      0%   { opacity: 1; }
+      50%  { opacity: 0.85; }
+      100% { opacity: 1; }
+    }
+
+    .hero-lines {
+      position: absolute;
+      inset: 0;
+      opacity: 0.04;
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,1) 60px,
+        rgba(255,255,255,1) 61px
+      );
+    }
+
+    .hero-accent-circle {
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,57,43,0.15);
+      pointer-events: none;
+    }
+    .hero-accent-circle::before {
+      content: '';
+      position: absolute;
+      inset: 60px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,57,43,0.1);
+    }
+    .hero-accent-circle::after {
+      content: '';
+      position: absolute;
+      inset: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,57,43,0.06) 0%, transparent 70%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 0 2rem;
+      margin-left: calc((100vw - 1160px) / 2);
+      padding-top: 88px;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 1.5rem;
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    }
+    .hero-eyebrow.revealed { opacity: 1; transform: none; }
+
+    .hero-content h1 {
+      color: #fff;
+      margin-bottom: 1.5rem;
+      font-weight: 300;
+    }
+    .hero-content h1 .word {
+      display: inline-block;
+      overflow: hidden;
+    }
+    .hero-content h1 .char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hero-content h1 .char.revealed { opacity: 1; transform: translateY(0); }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.8);
+      font-size: 1.05rem;
+      max-width: 540px;
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .hero-sub.revealed { opacity: 1; transform: none; }
+
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,0.4);
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── INTRO STRIP ── */
+    .intro-strip {
+      background: var(--teal-dark);
+      padding: 3.5rem 0;
+      text-align: center;
+      border-top: 1px solid rgba(192,57,43,0.2);
+      border-bottom: 1px solid rgba(192,57,43,0.2);
+    }
+    .intro-strip p {
+      font-family: var(--font-head);
+      font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+      color: rgba(255,255,255,0.85);
+      font-style: italic;
+      font-weight: 300;
+      max-width: 760px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .intro-strip p.revealed { opacity: 1; transform: none; }
+
+    /* ── SECTIONS ── */
+    .section-light  { background: var(--cream);      padding: 6rem 0; }
+    .section-warm   { background: var(--cream-warm); padding: 6rem 0; }
+    .section-dark   { background: var(--teal-deep);  padding: 6rem 0; }
+    .section-immersive {
+      position: relative;
+      background: var(--teal-dark);
+      padding: 7rem 0;
+    }
+    .section-immersive::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 50%, rgba(44,95,95,0.4) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 80%, rgba(139,69,19,0.15) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .section-immersive .container { position: relative; z-index: 2; }
+
+    /* ── FADE IN ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── STAGGER CHILDREN ── */
+    .stagger-children > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .stagger-children.visible > *:nth-child(1) { opacity:1; transform:none; transition-delay: 0s; }
+    .stagger-children.visible > *:nth-child(2) { opacity:1; transform:none; transition-delay: 0.12s; }
+    .stagger-children.visible > *:nth-child(3) { opacity:1; transform:none; transition-delay: 0.24s; }
+    .stagger-children.visible > *:nth-child(4) { opacity:1; transform:none; transition-delay: 0.36s; }
+    .stagger-children.visible > *:nth-child(5) { opacity:1; transform:none; transition-delay: 0.48s; }
+    .stagger-children.visible > *:nth-child(6) { opacity:1; transform:none; transition-delay: 0.60s; }
+
+    /* ── ABOUT SECTION ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .about-text h2 { margin-top: 0.25rem; }
+    .about-text p { color: var(--text-muted); }
+
+    .about-credentials {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+    }
+
+    .about-visual {
+      position: sticky;
+      top: 120px;
+    }
+    .about-panel {
+      background: linear-gradient(145deg, var(--teal-deep) 0%, var(--teal-dark) 60%, #1A3A3A 100%);
+      padding: 3rem 2.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .about-panel::before {
+      content: '';
+      position: absolute;
+      top: -40px; right: -40px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      border: 1px solid rgba(192,57,43,0.2);
+    }
+    .about-panel::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(192,57,43,0.06) 0%, transparent 70%);
+    }
+    .about-panel-quote {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 2.5vw, 1.8rem);
+      font-style: italic;
+      font-weight: 300;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+    .about-panel-quote::before {
+      content: '\201C';
+      font-size: 4rem;
+      color: var(--accent);
+      opacity: 0.4;
+      display: block;
+      line-height: 0.6;
+      margin-bottom: 0.75rem;
+    }
+    .about-panel-detail {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.25rem;
+    }
+    .about-logo-wrap {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .about-logo-wrap img { height: 60px; opacity: 0.9; }
+
+    /* ── PROBLEM CARDS ── */
+    .problem-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .problem-card {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-top: 3px solid var(--accent);
+      padding: 2rem 1.75rem;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .problem-card:hover {
+      background: rgba(255,255,255,0.07);
+    }
+    .problem-card-num {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      color: var(--accent);
+      opacity: 0.2;
+      line-height: 1;
+      margin-bottom: 0.5rem;
+    }
+    .problem-card h3 {
+      color: #fff;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+    .problem-card p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.93rem;
+      margin-bottom: 0;
+    }
+
+    /* ── SCIENCE CARDS ── */
+    .science-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+    .science-card {
+      background: #fff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+      padding: 2.5rem 2rem;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .science-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    }
+    .science-card-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.4rem;
+    }
+    .science-card h3 {
+      color: var(--teal-deep);
+      font-size: 1.3rem;
+      margin-bottom: 0.75rem;
+    }
+    .science-card p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 0.75rem; }
+    .science-card .evidence-tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(192,57,43,0.3);
+      padding: 0.25rem 0.75rem;
+      margin-top: 0.5rem;
+    }
+
+    /* ── EXPERIENCE SECTION ── */
+    .experience-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .experience-narrative h2 { color: #fff; margin-bottom: 1.5rem; }
+    .experience-narrative p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1rem;
+      line-height: 1.85;
+    }
+    .experience-narrative p + p { margin-top: 0.75rem; }
+    .experience-narrative .cta-wrap { margin-top: 2.5rem; }
+
+    .experience-features {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    .exp-feature {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-left: 3px solid var(--accent);
+      padding: 1.5rem 1.75rem;
+    }
+    .exp-feature h4 {
+      font-family: var(--font-head);
+      color: #fff;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .exp-feature p {
+      color: rgba(255,255,255,0.6);
+      font-size: 0.88rem;
+      margin-bottom: 0;
+    }
+
+    /* ── PARTNERSHIP SECTION ── */
+    .partnership-intro {
+      max-width: 700px;
+      margin-bottom: 3.5rem;
+    }
+    .partnership-intro p { color: var(--text-muted); }
+
+    .partner-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+    .partner-card {
+      background: var(--cream-warm);
+      border: 1px solid var(--warm-mid);
+      border-bottom: 3px solid var(--accent);
+      padding: 2.25rem 2rem;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .partner-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+    }
+    .partner-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    .partner-card h3 {
+      color: var(--teal-deep);
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .partner-card p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 0; }
+
+    .partnership-cta {
+      margin-top: 3.5rem;
+      padding: 3rem 2.5rem;
+      background: var(--teal-deep);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .partnership-cta-text h3 {
+      color: #fff;
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .partnership-cta-text p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.93rem;
+      margin-bottom: 0;
+    }
+
+    /* ── RESEARCH SECTION ── */
+    .research-intro {
+      max-width: 700px;
+      margin-bottom: 3.5rem;
+    }
+    .research-intro p { color: rgba(255,255,255,0.72); }
+
+    .research-timeline {
+      position: relative;
+      padding-left: 2.5rem;
+    }
+    .research-timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(192,57,43,0.3);
+    }
+    .timeline-item {
+      position: relative;
+      padding-bottom: 2.5rem;
+    }
+    .timeline-item:last-child { padding-bottom: 0; }
+    .timeline-dot {
+      position: absolute;
+      left: -2.5rem;
+      top: 4px;
+      width: 10px;
+      height: 10px;
+      background: var(--accent);
+      transform: translateX(-4px);
+    }
+    .timeline-phase {
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent-light);
+      margin-bottom: 0.4rem;
+    }
+    .timeline-item h3 {
+      color: #fff;
+      font-size: 1.3rem;
+      margin-bottom: 0.6rem;
+    }
+    .timeline-item p {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.93rem;
+      margin-bottom: 0;
+    }
+
+    .research-evidence {
+      margin-top: 4rem;
+      padding: 2.5rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .research-evidence h3 {
+      color: #fff;
+      font-size: 1.4rem;
+      margin-bottom: 1.25rem;
+    }
+    .evidence-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .evidence-list li {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+    .evidence-list li::before {
+      content: '✦';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.65rem;
+      top: 4px;
+    }
+    .evidence-list li strong {
+      color: rgba(255,255,255,0.85);
+      font-weight: 400;
+    }
+
+    /* ── CONTACT / FORM ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 5rem;
+      align-items: start;
+    }
+    .contact-text h2 { margin-top: 0.25rem; }
+    .contact-text p { color: var(--text-muted); }
+    .contact-info {
+      margin-top: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .contact-info-item span:first-child { color: var(--accent); flex-shrink: 0; }
+
+    .contact-form {
+      background: #fff;
+      padding: 2.5rem;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.06);
+    }
+    .form-group { margin-bottom: 1.25rem; }
+    .form-group label {
+      display: block;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--warm-mid);
+      background: var(--cream);
+      font-family: var(--font-body);
+      font-size: 0.93rem;
+      font-weight: 300;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      -webkit-appearance: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--accent); background: #fff; }
+    .form-group textarea { resize: vertical; }
+    .form-note { font-size: 0.78rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem; margin-bottom: 0; }
+    .form-success {
+      background: rgba(26,58,58,0.08);
+      border: 1px solid var(--teal-deep);
+      padding: 1rem;
+      text-align: center;
+      color: var(--teal-deep);
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      display: none;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--teal-dark);
+      padding: 3rem 0;
+      border-top: 1px solid rgba(192,57,43,0.2);
+    }
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.25rem;
+      text-align: center;
+    }
+    .footer-logo img { height: 52px; opacity: 0.85; }
+    .footer-tagline {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      max-width: 520px;
+      margin: 0;
+      font-style: italic;
+      font-family: var(--font-head);
+    }
+    .footer-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.25rem 1.5rem;
+    }
+    .footer-nav a {
+      color: rgba(255,255,255,0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .footer-nav a:hover { color: rgba(255,255,255,0.75); }
+    .footer-copy {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      margin: 0;
+    }
+    .footer-acknowledgement {
+      color: rgba(255,255,255,0.35);
+      font-size: 0.78rem;
+      max-width: 640px;
+      line-height: 1.7;
+      margin: 0;
+      font-style: italic;
+      font-family: var(--font-head);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .about-grid      { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual    { position: static; }
+      .science-grid    { grid-template-columns: 1fr; }
+      .problem-grid    { grid-template-columns: 1fr; }
+      .experience-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .contact-grid    { grid-template-columns: 1fr; gap: 3rem; }
+      .partner-grid    { grid-template-columns: 1fr; }
+      .research-timeline { padding-left: 1.75rem; }
+      .timeline-dot    { left: -1.75rem; }
+      .hero-content    { margin-left: 0; }
+      .partnership-layout { grid-template-columns: 1fr; }
+      .partnership-vr-image { position: static; }
+      .volunteer-grid  { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .nav-toggle { display: flex; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 88px; left: 0; right: 0;
+        background: var(--teal-dark);
+        flex-direction: column;
+        padding: 1.5rem 2rem;
+        gap: 0.25rem;
+        border-top: 1px solid rgba(192,57,43,0.2);
+      }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.75rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+      .nav-cta { margin-left: 0 !important; margin-top: 0.5rem; text-align: center; }
+      .hero-content { padding: 0 1.5rem; padding-top: 88px; }
+      .partnership-cta { flex-direction: column; align-items: flex-start; }
+      .contact-form { padding: 1.75rem; }
+      h1 { font-size: 3rem; }
+      .science-grid { grid-template-columns: 1fr; }
+      .volunteer-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 480px) {
+      .container { padding: 0 1.25rem; }
+      .section-light, .section-warm, .section-dark, .section-immersive { padding: 4rem 0; }
+    }
+
+    /* ── IMAGE BACKGROUNDS ── */
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('assets/images/altrd-cave-figures.jpg') center/cover no-repeat;
+      opacity: 1;
+      z-index: 0;
+    }
+    #problem {
+      position: relative;
+      background: url('assets/images/altrd-cave-gallery.jpg') center/cover no-repeat var(--teal-deep);
+    }
+    #problem::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.72);
+      pointer-events: none;
+    }
+    #problem .container { position: relative; z-index: 2; }
+    #experience {
+      background: url('assets/images/altrd-campfire-milkyway.jpg') center/cover no-repeat var(--teal-dark);
+    }
+    #experience::before {
+      background: rgba(13, 31, 31, 0.75);
+    }
+    #science {
+      position: relative;
+      background: url('assets/images/altrd-dreamtime-digital.jpg') center/cover no-repeat var(--cream);
+    }
+    #science::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(249, 245, 240, 0.88);
+      pointer-events: none;
+    }
+    #science .container { position: relative; z-index: 2; }
+
+    /* ── PARTNERSHIP LAYOUT WITH VR IMAGE ── */
+    .partnership-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 4rem;
+      align-items: start;
+    }
+    .partnership-vr-image {
+      position: sticky;
+      top: 120px;
+    }
+    .partnership-vr-image img {
+      width: 100%;
+      display: block;
+      box-shadow: 0 4px 32px rgba(0,0,0,0.14);
+    }
+    .partnership-vr-caption {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-top: 0.75rem;
+      font-style: italic;
+    }
+
+    /* ── MILESTONES / ROADMAP ── */
+    .milestones-intro { max-width: 700px; margin-bottom: 4rem; }
+    .milestones-intro p { color: var(--text-muted); }
+    .milestone-stage {
+      margin-bottom: 3.5rem;
+      padding-bottom: 3.5rem;
+      border-bottom: 1px solid var(--warm-mid);
+    }
+    .milestone-stage:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .milestone-stage-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 1.75rem;
+      flex-wrap: wrap;
+    }
+    .milestone-stage-num {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      color: var(--accent);
+      opacity: 0.2;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .milestone-stage-info { flex: 1; }
+    .milestone-stage-title {
+      font-family: var(--font-head);
+      font-size: 1.7rem;
+      color: var(--teal-deep);
+      font-weight: 300;
+      margin-bottom: 0.25rem;
+    }
+    .milestone-stage-period {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    .milestone-steps {
+      position: relative;
+      padding-left: 2.25rem;
+      border-top: 2px solid var(--accent);
+      padding-top: 1.5rem;
+    }
+    .milestone-steps::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.5rem;
+      bottom: 0;
+      width: 1px;
+      background: rgba(192,57,43,0.2);
+    }
+    .milestone-step { position: relative; padding-bottom: 1.5rem; }
+    .milestone-step:last-child { padding-bottom: 0; }
+    .milestone-step::before {
+      content: '';
+      position: absolute;
+      left: -2.25rem;
+      top: 6px;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      transform: translateX(-3.5px);
+    }
+    .milestone-step-month {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.35rem;
+      font-weight: 400;
+    }
+    .milestone-step p { color: var(--text-muted); font-size: 0.93rem; margin-bottom: 0; line-height: 1.75; }
+    .complete-badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #2a7a2a;
+      border: 1px solid rgba(42,122,42,0.4);
+      padding: 0.15rem 0.6rem;
+      margin-left: 0.5rem;
+      vertical-align: middle;
+      font-weight: 400;
+    }
+    .milestone-funding {
+      margin-top: 3.5rem;
+      padding: 2.5rem;
+      background: var(--teal-deep);
+      text-align: center;
+    }
+    .milestone-funding p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.6rem;
+    }
+    .milestone-funding-amount {
+      font-family: var(--font-head);
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: rgba(255,255,255,0.9);
+      font-style: italic;
+      font-weight: 300;
+    }
+
+    /* ── VOLUNTEER / JOIN SECTION ── */
+    .volunteer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.75rem;
+      margin-top: 3rem;
+    }
+    .volunteer-card {
+      background: #fff;
+      border: 1px solid var(--warm-mid);
+      border-top: 3px solid var(--accent);
+      padding: 2rem 1.75rem;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s;
+    }
+    .volunteer-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+    .volunteer-card-icon { font-size: 1.75rem; margin-bottom: 1rem; }
+    .volunteer-card h3 { color: var(--teal-deep); font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .volunteer-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.7; margin-bottom: 0; }
+    .volunteer-card .card-note {
+      font-size: 0.78rem;
+      color: var(--accent);
+      font-style: italic;
+      margin-top: 0.75rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(192,57,43,0.15);
+    }
+    .volunteer-card .card-cta { margin-top: auto; padding-top: 1.25rem; }
+    .btn-outline {
+      display: inline-block;
+      color: var(--accent);
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 1.5rem;
+      border: 1px solid rgba(192,57,43,0.4);
+      transition: border-color 0.25s, background 0.25s, color 0.25s;
+    }
+    .btn-outline:hover { border-color: var(--accent); background: var(--accent); color: #fff; }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── SCROLL PROGRESS ── -->
+  <div id="scroll-progress"></div>
+
+  <!-- ── NAV ── -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/images/altrd-logo-circle.jpg" alt="AltrD">
+      </a>
+      <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#problem">Vision</a></li>
+        <li><a href="#science">The Science</a></li>
+        <li><a href="#experience">The Experience</a></li>
+        <li><a href="#partnership">Partnership</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#milestones">Roadmap</a></li>
+        <li><a href="#volunteer">Volunteer</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#contact" class="nav-cta">Get Involved</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- ── HERO ── -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gradient"></div>
+    <div class="hero-lines"></div>
+    <div class="hero-accent-circle"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">Indigenous Healing · Immersive Technology · Cultural Reconnection</p>
+      <h1>Healing Through<br>Culture.<br>Connection.<br>Country.</h1>
+      <p class="hero-sub">A therapeutic virtual reality metaverse designed with and for Indigenous Australians — using immersive cultural experiences to support recovery from alcohol and substance addiction.</p>
+      <div class="hero-btns">
+        <a href="#about" class="btn-ghost">Explore the Vision</a>
+        <a href="#contact" class="btn-primary">Partner With Us</a>
+      </div>
+    </div>
+    <a href="#about" class="scroll-indicator" aria-label="Scroll down">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </a>
+  </section>
+
+  <!-- ── INTRO STRIP ── -->
+  <section class="intro-strip">
+    <div class="container">
+      <p>"Healing begins when we remember who we are."</p>
+    </div>
+  </section>
+
+  <!-- ── ABOUT / VISION ── -->
+  <section id="about" class="section-light">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text fade-in">
+          <span class="section-label">The Vision</span>
+          <h2>What AltrD Is</h2>
+          <p>AltrD (pronounced <em>Altered</em>) is a therapeutic metaverse — an immersive virtual reality environment where Indigenous Australians can reconnect with their culture, country, and community as a pathway to healing from alcohol and substance addiction.</p>
+          <p>Built on clinical evidence for VR-based therapeutic intervention and grounded in Indigenous self-determination, AltrD brings country into the clinical space — giving people a moment of profound reconnection when they need it most.</p>
+          <p>Led by Dr Jacqui Lavis, AltrD is co-designed with community, governed by community, and measured by outcomes that matter to community.</p>
+          <div class="about-credentials">
+            <span>✦ Dr Jacqui Lavis — Strategist and Storyteller</span>
+            <span>✦ Evidence-Based Therapeutic Design</span>
+            <span>✦ Indigenous Cultural Governance</span>
+            <span>✦ Far North Queensland</span>
+          </div>
+        </div>
+        <div class="about-visual fade-in">
+          <img src="assets/images/altrd-elder-portrait.jpg" alt="Elder man, cultural custodian and healer" style="border-radius:12px;max-width:400px;width:100%;display:block;box-shadow:0 8px 40px rgba(0,0,0,0.18);">
+          <div class="about-panel" style="margin-top:1.5rem;">
+            <p class="about-panel-quote">Country is not a backdrop to healing. Country is the healer.</p>
+            <p class="about-panel-detail">AltrD · Therapeutic VR Metaverse · Est. 2024</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE PROBLEM ── -->
+  <section id="problem" class="section-dark">
+    <div class="container">
+      <span class="section-label light">Why This Matters</span>
+      <h2 class="light">The Gap That Exists</h2>
+      <p class="section-intro light">The crisis is well documented. What has been missing is a response built with the communities it is designed to serve.</p>
+      <div class="problem-grid stagger-children">
+        <div class="problem-card">
+          <div class="problem-card-num">01</div>
+          <h3>Highest Risk, Least Served</h3>
+          <p>Indigenous Australians who drink at risky levels experience substantially worse outcomes. Existing services are not designed for cultural context, leading to disengagement and relapse. The system was not built with community — and community knows it.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-num">02</div>
+          <h3>Culture as Medicine</h3>
+          <p>Systematic review evidence shows cultural self-determination and community governance are the critical success factors that mainstream clinical programmes consistently lack. Culture is not a supplement to treatment — it is the treatment.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-num">03</div>
+          <h3>A Global First</h3>
+          <p>No peer-reviewed published study has evaluated VR-based therapeutic intervention for alcohol use disorder in Aboriginal or Torres Strait Islander populations. AltrD will change that — with community, not for community.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE SCIENCE ── -->
+  <section id="science" class="section-light">
+    <div class="container">
+      <span class="section-label">The Evidence</span>
+      <h2>Built on Science</h2>
+      <p class="section-intro">AltrD integrates three clinically validated mechanisms within a culturally governed framework. The evidence base is Level I — the strongest available in clinical research.</p>
+      <div class="science-grid stagger-children">
+
+        <div class="science-card fade-in">
+          <div class="science-card-icon">◈</div>
+          <h3>VR Cue Exposure Therapy</h3>
+          <p>Systematic review of randomised controlled trial evidence demonstrates strong positive effects for virtual reality intervention in alcohol use disorder. When people are safely exposed to cues in a controlled immersive environment, craving responses are reduced and extinction learning is accelerated.</p>
+          <span class="evidence-tag">Glavak-Tkalić et al., 2025 · Level I Evidence · 17/20 RCTs positive</span>
+        </div>
+
+        <div class="science-card fade-in">
+          <div class="science-card-icon">◉</div>
+          <h3>Cultural Reconnection as Therapeutic Mechanism</h3>
+          <p>Systematic reviews of Indigenous-specific substance use interventions consistently identify cultural self-determination and healing on country as the primary protective and therapeutic factors. Identity, belonging, and connection to country are not secondary outcomes — they are the mechanism of recovery.</p>
+          <span class="evidence-tag">Krakouer et al., 2022 · Level I Evidence</span>
+        </div>
+
+        <div class="science-card fade-in">
+          <div class="science-card-icon">◎</div>
+          <h3>Motivational Interviewing in VR</h3>
+          <p>AI-guided conversational pathways aligned with motivational interviewing frameworks support agency, self-efficacy, and self-determination in the recovery process. The AltrD environment responds to the individual — meeting them in their readiness, not prescribing a stage they have not yet reached.</p>
+          <span class="evidence-tag">Evidence-Based Framework · Miller &amp; Rollnick, 2013</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── THE EXPERIENCE ── -->
+  <section id="experience" class="section-immersive">
+    <div class="container">
+      <div class="experience-layout">
+        <div class="experience-narrative fade-in">
+          <span class="section-label light">The Proof of Concept</span>
+          <h2>What You Will Experience</h2>
+          <p>Put on the headset. You are standing on country — red earth, ancient rock shelters, the sound of wind moving through spinifex. A wedge-tailed eagle crosses the sky overhead.</p>
+          <p>An elder's voice speaks to you — in language, in story, in the cadence that has carried this country for sixty thousand years. The clinical room disappears. The craving that brought you here begins to soften — not through willpower, but through something older and more durable: a sense of belonging, of place, of self.</p>
+          <p>This is not escapism. This is return. The VR environment is not designed to take you away from yourself — it is designed to bring you back.</p>
+          <p>The AltrD proof of concept is a two-minute immersive experience demonstrating what becomes possible when technology steps back and culture steps forward. The headset is a doorway. What lies on the other side is home.</p>
+          <div class="cta-wrap">
+            <a href="#contact" class="btn-primary">Request a Demo</a>
+          </div>
+        </div>
+        <div class="experience-features stagger-children">
+          <div class="exp-feature">
+            <h4>Immersive Country Environments</h4>
+            <p>Photorealistic and culturally authentic VR environments — specific to the country, language group, and community of each participant. Not a generic "nature experience". Country.</p>
+          </div>
+          <div class="exp-feature">
+            <h4>Elder Presence &amp; Voice</h4>
+            <p>Community elders co-design and voice the therapeutic environment. Language, song, and story are embedded in the experience from the ground up — never extracted, always given.</p>
+          </div>
+          <div class="exp-feature">
+            <h4>AI-Guided Therapeutic Pathways</h4>
+            <p>Conversational AI aligned with motivational interviewing frameworks responds to the individual in real time — no two sessions are identical. The environment meets the person, not the protocol.</p>
+          </div>
+          <div class="exp-feature">
+            <h4>Clinical Integration</h4>
+            <p>Designed for deployment within existing health services — hospital wards, community health centres, residential treatment facilities. Requires only a standalone VR headset and fifteen minutes of clinical time.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARTNERSHIP ── -->
+  <section id="partnership" class="section-light">
+    <div class="container">
+      <span class="section-label">Partnership</span>
+      <h2>Who We're Building This With</h2>
+      <div class="partnership-layout">
+        <div>
+          <div class="partnership-intro fade-in">
+            <p>AltrD cannot succeed without the right partners at every layer. We are not looking for funders who want to attach their name to Indigenous health. We are looking for organisations willing to build something genuinely new — with us, not for us.</p>
+          </div>
+          <div class="partner-grid stagger-children">
+
+        <div class="partner-card">
+          <div class="partner-card-icon">🏥</div>
+          <h3>Aboriginal Community Controlled Health Organisations</h3>
+          <p>ACCHOs are the governing backbone of AltrD. Community-led governance is not an add-on to the clinical framework — it is the clinical framework. We are actively seeking ACCHO partners in Far North Queensland and beyond for co-design, ethics review, and deployment.</p>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-card-icon">🎓</div>
+          <h3>Universities &amp; Research Institutions</h3>
+          <p>We are seeking academic partners to co-design the first peer-reviewed RCT of VR-based therapeutic intervention in an Indigenous Australian population. Ethics, trial design, publication, and knowledge translation are all areas of active collaboration.</p>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-card-icon">⚕</div>
+          <h3>Health Services &amp; Funders</h3>
+          <p>Hospital networks, Primary Health Networks, and Medicare-funded alcohol and other drug services seeking evidence-based, culturally appropriate interventions that move beyond engagement as an outcome and measure recovery as the communities themselves define it.</p>
+        </div>
+
+        <div class="partner-card">
+          <div class="partner-card-icon">🥽</div>
+          <h3>Technology &amp; XR Partners</h3>
+          <p>VR hardware partners, immersive media developers, and Indigenous content creators building the environments. AltrD is a platform, not a product — and the technology layer must be as culturally governed as everything else.</p>
+        </div>
+
+          </div>
+        </div>
+        <div class="partnership-vr-image fade-in">
+          <img src="assets/images/altrd-elder-vr.jpg" alt="Elder man wearing a VR headset — experiencing AltrD's immersive cultural environment">
+          <p class="partnership-vr-caption">AltrD places participants in immersive cultural environments — bringing country into the clinical space.</p>
+        </div>
+      </div>
+
+      <div class="partnership-cta fade-in">
+        <div class="partnership-cta-text">
+          <h3>Ready to Build Something That Matters?</h3>
+          <p>We are currently in active development of the proof of concept and seeking partners for the pilot phase. Get in touch to start a conversation.</p>
+        </div>
+        <a href="#contact" class="btn-primary">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── RESEARCH ── -->
+  <section id="research" class="section-dark">
+    <div class="container">
+      <span class="section-label light">Research</span>
+      <h2 class="light">The Evidence We Are Building</h2>
+      <div class="research-intro fade-in">
+        <p>AltrD is not designed as a product looking for evidence after the fact. The research pipeline is built into the architecture — community governance first, ethics next, evidence throughout.</p>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;">
+
+        <div class="research-timeline fade-in">
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-phase">Phase 1 · Current</p>
+            <h3>Proof of Concept</h3>
+            <p>Co-design of the two-minute immersive VR experience with community elders and health workers. Ethics application in development. Community governance structure established.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-phase">Phase 2 · 2025</p>
+            <h3>Pilot Study</h3>
+            <p>Single-arm pilot with n=10–15 participants within an ACCHO-governed health service. Primary outcomes: feasibility, acceptability, and preliminary craving reduction data.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-phase">Phase 3 · 2026</p>
+            <h3>Randomised Controlled Trial</h3>
+            <p>Crossover design RCT with target enrolment n=40. Primary outcome: craving reduction measured by Visual Analogue Scale and AUDIT-C. Secondary outcomes: treatment engagement, cultural connectedness, and self-reported wellbeing.</p>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-dot"></div>
+            <p class="timeline-phase">Phase 4 · 2027+</p>
+            <h3>Publication &amp; Scale</h3>
+            <p>Peer-reviewed publication of the first RCT of its kind globally. Open-source protocol for adaptation by other communities. Policy and funding advocacy based on Level I evidence.</p>
+          </div>
+        </div>
+
+        <div class="fade-in">
+          <div class="research-evidence">
+            <h3>The Evidence Foundation</h3>
+            <ul class="evidence-list">
+              <li><strong>Glavak-Tkalić et al. (2025)</strong> — Systematic review of VR-based interventions in alcohol use disorder: 17 of 20 RCTs demonstrate positive effects on craving reduction. Level I evidence.</li>
+              <li><strong>Krakouer et al. (2022)</strong> — Systematic review of Indigenous substance use interventions: cultural self-determination and community governance identified as primary protective factors. Level I evidence.</li>
+              <li><strong>Miller &amp; Rollnick (2013)</strong> — Motivational Interviewing: the foundational framework for the AI-guided conversational layer. Extensively validated across addiction populations.</li>
+              <li><strong>Laver et al. (2017)</strong> — Cochrane review of virtual reality for rehabilitation and recovery: strong evidence base for immersive VR as a therapeutic modality across clinical populations.</li>
+            </ul>
+          </div>
+
+          <div style="margin-top:1.5rem;padding:1.75rem 2rem;background:rgba(192,57,43,0.08);border:1px solid rgba(192,57,43,0.2);">
+            <p style="color:rgba(255,255,255,0.85);font-family:var(--font-head);font-style:italic;font-size:1.05rem;margin-bottom:0.5rem;">"We are not doing research on community. We are doing research with community — and the questions we ask are the ones community says matter."</p>
+            <p style="color:rgba(255,255,255,0.45);font-size:0.75rem;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:0;">Dr Jacqui Lavis, AltrD Founder</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── MILESTONES / ROADMAP ── -->
+  <section id="milestones" class="section-light">
+    <div class="container">
+      <span class="section-label">The Roadmap</span>
+      <h2>A 12-Month Journey to Healing at Scale</h2>
+      <div class="milestones-intro fade-in">
+        <p>AltrD moves from proof-of-concept to scalable impact in three stages — each building on the last, each generating the evidence and momentum needed to unlock the next.</p>
+      </div>
+
+      <!-- Stage 1 -->
+      <div class="milestone-stage fade-in">
+        <div class="milestone-stage-header">
+          <span class="milestone-stage-num">01</span>
+          <div class="milestone-stage-info">
+            <div class="milestone-stage-title">Proof of Concept</div>
+            <div class="milestone-stage-period">Months 1–4 · April–July 2026</div>
+          </div>
+        </div>
+        <div class="milestone-steps">
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 1 — April 2026</div>
+            <p>Strategic foundation, research report, scoping review manuscript, website launch <span class="complete-badge">✓ Complete</span></p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 2 — May 2026</div>
+            <p>Ian Potter Foundation EOI submission (28 May deadline). Community governance partner identified (Gindaja or equivalent ACCO). First elder co-design consultation.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 3 — June 2026</div>
+            <p>360° filming on Country with elder consent. Wonda VR PoC build. First headset demonstration at clinical site.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 4 — July 2026</div>
+            <p>PoC demonstrated to Orygen XR Lab. Scoping review submitted to Drug and Alcohol Review. QMHC grant result expected.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 2 -->
+      <div class="milestone-stage fade-in">
+        <div class="milestone-stage-header">
+          <span class="milestone-stage-num">02</span>
+          <div class="milestone-stage-info">
+            <div class="milestone-stage-title">Minimum Viable Product</div>
+            <div class="milestone-stage-period">Months 5–9 · August–December 2026</div>
+          </div>
+        </div>
+        <div class="milestone-steps">
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 5 — August 2026</div>
+            <p>NHMRC Partnership Projects application submitted (with Orygen as institutional partner). Ethics application to JCU HREC submitted.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Months 6–7 — September–October 2026</div>
+            <p>MVP build — expanded cultural content, AI conversational guide, clinical safety protocols. Beta testing with volunteer participants (with ethics approval).</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 8 — November 2026</div>
+            <p>MRFF IHRF 2026 application submitted. First peer-reviewed publication data emerging from beta.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 9 — December 2026</div>
+            <p>MVP operational. Early outcome data collected. Stage 3 funding strategy finalised.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Stage 3 -->
+      <div class="milestone-stage fade-in">
+        <div class="milestone-stage-header">
+          <span class="milestone-stage-num">03</span>
+          <div class="milestone-stage-info">
+            <div class="milestone-stage-title">Scale &amp; Optimise</div>
+            <div class="milestone-stage-period">Months 10–12 · January–March 2027</div>
+          </div>
+        </div>
+        <div class="milestone-steps">
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 10 — January 2027</div>
+            <p>Stage 2 funding secured. Platform scaling architecture deployed.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 11 — February 2027</div>
+            <p>Expansion to additional communities. Clinical trial Phase II design finalised.</p>
+          </div>
+          <div class="milestone-step">
+            <div class="milestone-step-month">Month 12 — March 2027</div>
+            <p>Full published evidence base emerging. National rollout strategy activated. International partnerships explored.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="milestone-funding fade-in">
+        <p>Total funding target across 3 stages</p>
+        <div class="milestone-funding-amount">$34M+ available across identified grant streams</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── COMMUNITY BANNER ── -->
+  <div class="community-banner-wrap">
+    <img src="assets/images/altrd-community-campfire.jpg" alt="Multi-generational Indigenous community gathering around a campfire" class="community-banner-img">
+    <div class="community-banner-overlay"></div>
+  </div>
+
+  <!-- ── VOLUNTEER / JOIN THE MISSION ── -->
+  <section id="volunteer" class="section-warm">
+    <div class="container">
+      <span class="section-label">Join the Mission</span>
+      <h2>We Cannot Do This Alone</h2>
+      <p class="section-intro">AltrD is built on the belief that healing is a collective act. We are calling for people who want to contribute their skills, time, knowledge, or resources to help build something that has never existed before.</p>
+
+      <div class="volunteer-grid stagger-children">
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">📋</div>
+          <h3>Research &amp; Administration Volunteers</h3>
+          <p>We need people to help coordinate community consultations, manage research data, support grant applications, and assist with literature review and documentation. Students and recent graduates in health, social work, psychology, or public health are strongly encouraged.</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Express Interest</a></div>
+        </div>
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">🎥</div>
+          <h3>Videographers &amp; Filmmakers</h3>
+          <p>We are looking for experienced videographers skilled in 360° and documentary-style filming, video editing, and content publishing. Indigenous applicants have a significant advantage — access to restricted cultural sites requires community relationship and trust that cannot be bought or assumed.</p>
+          <p class="card-note">Indigenous applicants welcomed — cultural access privileges apply</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Express Interest</a></div>
+        </div>
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">🤝</div>
+          <h3>Research Participants — Beta Testers</h3>
+          <p>We are seeking volunteer participants experiencing alcohol or other drug challenges who are willing to experience the AltrD prototype and provide honest feedback. All participation is strictly confidential, voluntary, and ethically supervised. Your experience will directly shape a tool designed to help people like you.</p>
+          <p class="card-note">Ethics approval required before participation begins — currently in preparation</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Register Interest</a></div>
+        </div>
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">💡</div>
+          <h3>Financial Contributors &amp; Investors</h3>
+          <p>If you believe in the mission, your financial contribution — whether philanthropic or investment — directly accelerates the timeline from concept to clinical impact. Every dollar shortens the time between now and a working tool in the hands of communities that need it. Tax-deductible donation pathways being established.</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Get in Touch</a></div>
+        </div>
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">🏛</div>
+          <h3>Business &amp; Professional Services</h3>
+          <p>We are seeking pro bono or subsidised support from lawyers (IP, contracts, ethics), accountants, technology providers, clinical advisors, and business mentors. If you have expertise and want to apply it to something that matters — this is it.</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Offer Your Skills</a></div>
+        </div>
+
+        <div class="volunteer-card">
+          <div class="volunteer-card-icon">🌿</div>
+          <h3>Community Organisations &amp; Health Services</h3>
+          <p>If you are an Aboriginal Community Controlled Health Organisation, community group, rehabilitation service, or health provider interested in piloting AltrD or participating in co-design — we want to hear from you. Community governance is not optional — it is the foundation.</p>
+          <div class="card-cta"><a href="#contact" class="btn-outline">Start the Conversation</a></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CONTACT ── -->
+  <section id="contact" class="section-warm">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-text fade-in">
+          <span class="section-label">Get Involved</span>
+          <h2>Get Involved</h2>
+          <p>Whether you are a researcher, funder, community organisation, health service, or someone with lived experience — if you see the potential of culturally governed therapeutic VR, we want to hear from you. Jacqui reads every message.</p>
+          <div class="contact-info">
+            <div class="contact-info-item">
+              <span>✦</span>
+              <span><strong>Dr Jacqui Lavis</strong></span>
+            </div>
+            <div class="contact-info-item">
+              <span>✦</span>
+              <span>Strategist and Storyteller, AltrD Therapeutic Metaverse</span>
+            </div>
+            <div class="contact-info-item">
+              <span>✦</span>
+              <span><a href="mailto:jacqui.lavis.altrd@gmail.com" style="color:var(--accent)">jacqui.lavis.altrd@gmail.com</a></span>
+            </div>
+            <div class="contact-info-item">
+              <span>✦</span>
+              <span><a href="tel:0407334032" style="color:var(--accent)">0407 334 032</a></span>
+            </div>
+            <div class="contact-info-item">
+              <span>✦</span>
+              <span>James Cook University, Cairns, Queensland</span>
+            </div>
+          </div>
+        </div>
+        <form class="contact-form fade-in" id="contact-form" action="mailto:jacqui.lavis.altrd@gmail.com" method="post" enctype="text/plain">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" placeholder="First and last name" required>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="organisation">Organisation <span style="font-style:italic;text-transform:none;letter-spacing:0">(optional)</span></label>
+            <input type="text" id="organisation" name="organisation" placeholder="Your organisation or affiliation">
+          </div>
+          <div class="form-group">
+            <label for="contribution-type">How you want to contribute</label>
+            <select id="contribution-type" name="contribution-type" required>
+              <option value="" disabled selected>Select how you'd like to contribute</option>
+              <option value="Research volunteer">Research volunteer</option>
+              <option value="Videographer">Videographer</option>
+              <option value="Beta tester">Beta tester</option>
+              <option value="Financial contributor">Financial contributor</option>
+              <option value="Professional services">Professional services</option>
+              <option value="Community organisation">Community organisation</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="Tell us about your interest and what you'd like to build together."></textarea>
+          </div>
+          <button type="submit" class="btn-primary full-width">Send Message</button>
+          <p class="form-note">Jacqui reads every message personally.</p>
+          <div class="form-success" id="form-success">
+            <p>✓ Thank you — Dr Lavis will be in touch soon.</p>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-logo">
+        <img src="assets/images/altrd-logo.jpg" alt="AltrD">
+      </div>
+      <p class="footer-tagline">Healing through Culture, Connection, and Country · Co-designed with and for Aboriginal and Torres Strait Islander peoples · Built on the foundations of 60,000 years of knowledge</p>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#problem">Vision</a>
+        <a href="#science">The Science</a>
+        <a href="#experience">The Experience</a>
+        <a href="#partnership">Partnership</a>
+        <a href="#research">Research</a>
+        <a href="#milestones">Roadmap</a>
+        <a href="#volunteer">Volunteer</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <p class="footer-acknowledgement">AltrD acknowledges the Traditional Custodians of the lands on which we work and live. We pay our respects to Elders past, present, and emerging, and recognise that sovereignty was never ceded.</p>
+      <p class="footer-copy">AltrD Therapeutic Metaverse · Strategic architecture: Andrew Lizzio, Freedome For Me Pty Ltd · © 2026 AltrD</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── SCROLL PROGRESS BAR
+    const progressBar = document.getElementById('scroll-progress');
+    window.addEventListener('scroll', () => {
+      const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+      progressBar.style.width = pct + '%';
+    }, { passive: true });
+
+    // ── NAV scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    // ── Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    toggle.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', open);
+    });
+    navLinks.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        toggle.setAttribute('aria-expanded', false);
+      });
+    });
+
+    // ── HERO TEXT ANIMATION
+    function animateHero() {
+      const eyebrow = document.querySelector('.hero-eyebrow');
+      const h1 = document.querySelector('.hero-content h1');
+      const sub = document.querySelector('.hero-sub');
+
+      if (h1) {
+        const lines = h1.innerHTML.split('<br>').map(l => l.trim()).filter(l => l);
+        h1.innerHTML = lines.map(line =>
+          '<span class="word">' + line.split('').map(c =>
+            '<span class="char">' + (c === ' ' ? '&nbsp;' : c) + '</span>'
+          ).join('') + '</span><br>'
+        ).join('');
+        const chars = h1.querySelectorAll('.char');
+        chars.forEach((c, i) => {
+          setTimeout(() => c.classList.add('revealed'), 400 + i * 35);
+        });
+      }
+
+      setTimeout(() => eyebrow && eyebrow.classList.add('revealed'), 200);
+      const totalChars = document.querySelectorAll('.hero-content h1 .char').length;
+      setTimeout(() => sub && sub.classList.add('revealed'), 400 + totalChars * 35 + 150);
+      const heroBtns = document.querySelector('.hero-btns');
+      if (heroBtns) setTimeout(() => heroBtns.classList.add('revealed'), 400 + totalChars * 35 + 420);
+    }
+    window.addEventListener('load', animateHero);
+
+    // ── INTRO STRIP QUOTE
+    const introObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); introObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.intro-strip p').forEach(el => introObserver.observe(el));
+
+    // ── SECTION LABELS
+    const labelObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('revealed'); labelObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.8 });
+    document.querySelectorAll('.section-label').forEach(el => labelObserver.observe(el));
+
+    // ── GENERIC FADE-IN
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          fadeObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+    // ── STAGGER CHILDREN
+    const staggerObserver = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); staggerObserver.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.stagger-children').forEach(el => staggerObserver.observe(el));
+
+    // ── BUTTON RIPPLE
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const r = document.createElement('span');
+        r.className = 'ripple';
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        r.style.cssText = 'width:' + size + 'px;height:' + size + 'px;left:' + (e.clientX - rect.left - size/2) + 'px;top:' + (e.clientY - rect.top - size/2) + 'px';
+        this.appendChild(r);
+        setTimeout(() => r.remove(), 600);
+      });
+    });
+
+    // ── CONTACT FORM
+    const form = document.getElementById('contact-form');
+    if (form) {
+      form.addEventListener('submit', e => {
+        e.preventDefault();
+        const name = form.name.value;
+        const email = form.email.value;
+        const org = form.organisation.value;
+        const type = form['contribution-type'].value;
+        const message = form.message.value;
+        const subject = encodeURIComponent('AltrD — ' + type + ' — ' + name);
+        const body = encodeURIComponent(
+          'Name: ' + name +
+          '\nEmail: ' + email +
+          '\nOrganisation: ' + (org || 'Not provided') +
+          '\nHow they want to contribute: ' + type +
+          '\n\n' + message
+        );
+        window.location.href = 'mailto:jacqui.lavis.altrd@gmail.com?subject=' + subject + '&body=' + body;
+        const success = document.getElementById('form-success');
+        success.style.display = 'block';
+        form.reset();
+      });
+    }
+  </script>
+
+</body>
+</html>
